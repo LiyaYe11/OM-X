@@ -27,9 +27,15 @@
     port_name="$(arg port_name)"/>
 
   <gazebo>
+    <!--
     <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
       <parameters>$(find open_manipulator_x_bringup)/config/gazebo_controller_manager.yaml</parameters>
     </plugin>
+    -->
+    <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin" filename="gz_ros2_control-system">
+      <parameters>$(find open_manipulator_x_bringup)/config/gz_controller_manager.yaml</parameters>
+    </plugin>
+    
   </gazebo>
 
   <!-- World -->

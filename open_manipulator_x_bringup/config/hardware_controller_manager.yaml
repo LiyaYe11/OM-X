@@ -21,9 +21,9 @@ arm_controller:
       - joint4
 
     interface_name: position
-
+    
     command_interfaces:
-      - position
+        - position
 
     state_interfaces:
       - position
