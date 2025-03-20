@@ -173,6 +173,13 @@ def generate_launch_description():
         output='screen',
     )
 
+    arm_controller_effort_spawner = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=['arm_controller_effort'],
+        output='screen',
+    )
+
     gripper_controller_spawner = Node(
         package='controller_manager',
         executable='spawner',
@@ -195,6 +202,14 @@ def generate_launch_description():
             )
         )
 
+    delay_arm_controller_spawner_effort_after_joint_state_broadcaster_spawner = \
+        RegisterEventHandler(
+            event_handler=OnProcessExit(
+                target_action=joint_state_broadcaster_spawner,
+                on_exit=[arm_controller_effort_spawner],
+            )
+        )
+
     delay_gripper_controller_spawner_after_joint_state_broadcaster_spawner = \
         RegisterEventHandler(
             event_handler=OnProcessExit(
@@ -209,6 +224,7 @@ def generate_launch_description():
         joint_state_broadcaster_spawner,
         delay_rviz_after_joint_state_broadcaster_spawner,
         delay_arm_controller_spawner_after_joint_state_broadcaster_spawner,
+        delay_arm_controller_spawner_effort_after_joint_state_broadcaster_spawner,
         delay_gripper_controller_spawner_after_joint_state_broadcaster_spawner,
     ]
 
