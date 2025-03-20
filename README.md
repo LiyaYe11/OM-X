@@ -7,6 +7,18 @@ The 4-DOF Open Manipulator-X now supports MoveIt 2, enabling enhanced motion pla
 - Active Branches: noetic, humble, main
 - Legacy Branches: *-devel
 
+# Warning: porting in Gz Harmonic
+
+For the moment the following packages are skipped during the compilation:
+- open_manipulator_x_teleop
+- open_manipulator_x_playground
+- open_manipulator_x_moveit_config
+- open_manipulator_x_gui
+
+because they are useless for our goals.
+
+
+
 # ROBOTIS e-Manual for OpenMANIPULATOR-X
 - [http://emanual.robotis.com/docs/en/platform/openmanipulator/](http://emanual.robotis.com/docs/en/platform/openmanipulator/)
 
