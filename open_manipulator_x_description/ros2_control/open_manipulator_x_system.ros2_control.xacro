@@ -14,7 +14,7 @@
       <xacro:unless value="$(arg use_sim)">
         <hardware>
           <xacro:if value="${use_fake_hardware}">
-            <plugin>fake_components/GenericSystem</plugin>
+            <plugin>mock_components/GenericSystem</plugin> <!--Humble https://control.ros.org/humble/doc/ros2_control/hardware_interface/doc/mock_components_userdoc.html -->
             <param name="fake_sensor_commands">${fake_sensor_commands}</param>
             <param name="state_following_offset">0.0</param>
           </xacro:if>
@@ -60,6 +60,8 @@
           </xacro:unless>
         </hardware>
       </xacro:unless>
+
+
 
       <joint name="${prefix}joint1">
         <command_interface name="position"/>
