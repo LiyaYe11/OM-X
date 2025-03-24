@@ -15,8 +15,16 @@ For the moment the following packages are skipped during the compilation:
 - open_manipulator_x_moveit_config
 - open_manipulator_x_gui
 
-because they are useless for our goals.
+because they are useless for our goals. For each package, in the CMakeLists.txt there is a variable called **SKIP_BUILD**:
 
+```shell
+set(SKIP_BUILD OFF) # Build the package
+# set(SKIP_BUILD ON) # Doesn't build the package
+```
+
+**Dependences**:
+- [MoveIt2](https://moveit.ai/install-moveit2/binary/) 
+    - `sudo apt install ros-humble-moveit`
 
 
 # ROBOTIS e-Manual for OpenMANIPULATOR-X
