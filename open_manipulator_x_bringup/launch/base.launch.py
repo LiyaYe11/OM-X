@@ -82,12 +82,57 @@ def generate_launch_description():
         )
     )
 
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            'description_package',
+            default_value='open_manipulator_x_description',
+            description='The name package that contains the XACRO files'
+        )
+    )
+
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            'xacro_folder',
+            default_value='urdf',
+            description='The folder name that contains the main xacro file'
+        )
+    )
+
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            'xacro_name',
+            default_value='open_manipulator_x_robot.urdf.xacro',
+            description='The name of the xacro file. Mandatory to add its extensions'
+        )
+    )
+
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            'enable_effort_controller',
+            default_value='false',
+            description='Enable the effort controller of arm \
+                and disable position controller'
+        )
+    )
+
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            'enable_gripper_controller',
+            default_value='true',
+            description='Enable the gripper controller of arm'
+        )
+    )
+
+
     start_rviz = LaunchConfiguration('start_rviz')
     prefix = LaunchConfiguration('prefix')
     use_sim = LaunchConfiguration('use_sim')
     use_fake_hardware = LaunchConfiguration('use_fake_hardware')
     fake_sensor_commands = LaunchConfiguration('fake_sensor_commands')
     port_name = LaunchConfiguration('port_name')
+    description_package = LaunchConfiguration('description_package')
+    xacro_folder = LaunchConfiguration('xacro_folder')
+    xacro_name = LaunchConfiguration('xacro_name')
 
     urdf_file = Command(
         [
@@ -95,9 +140,9 @@ def generate_launch_description():
             ' ',
             PathJoinSubstitution(
                 [
-                    FindPackageShare('open_manipulator_x_description'),
-                    'urdf',
-                    'open_manipulator_x_robot.urdf.xacro'
+                    FindPackageShare(description_package),
+                    xacro_folder,
+                    xacro_name
                 ]
             ),
             ' ',
@@ -171,6 +216,7 @@ def generate_launch_description():
         executable='spawner',
         arguments=['arm_controller'],
         output='screen',
+        condition=UnlessCondition(LaunchConfiguration('enable_effort_controller'))
     )
 
     arm_controller_effort_spawner = Node(
@@ -178,6 +224,7 @@ def generate_launch_description():
         executable='spawner',
         arguments=['arm_controller_effort'],
         output='screen',
+        condition=IfCondition(LaunchConfiguration('enable_effort_controller'))
     )
 
     gripper_controller_spawner = Node(
@@ -185,6 +232,7 @@ def generate_launch_description():
         executable='spawner',
         arguments=['gripper_controller'],
         output='screen',
+        condition=IfCondition(LaunchConfiguration('enable_gripper_controller'))
     )
 
     delay_rviz_after_joint_state_broadcaster_spawner = RegisterEventHandler(
