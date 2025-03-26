@@ -26,6 +26,27 @@ set(SKIP_BUILD OFF) # Build the package
 - [MoveIt2](https://moveit.ai/install-moveit2/binary/) 
     - `sudo apt install ros-humble-moveit`
 
+## Example test
+-  move arm with **the trajectory/position controller**
+```bash
+------
+```
+-  move arm with **the effort controller**
+```bash
+ros2 topic pub /effort_controller/commands std_msgs/msg/Float64MultiArray '{data: [1.0, -0.5, 0.3, 0.0]}'
+```
+
+### TODO:
+- [ ] Resolve problem  `[Err] [Physics.cc:1785] Attempting to create a mimic constraint for joint [gripper_right_joint] but the chosen physics engine does not support mimic constraints, so no constraint will be created.`
+    -   see [this example](https://github.com/gazebosim/gz-sim/blob/gz-sim8/examples/worlds/mimic_fast_slow_pendulums_world.sdf)
+- [ ] Add torque control on the gripper
+- [ ] Implement the torque control for the real hardware
+- [ ] Do the porting of the following package:
+    - [ ] open_manipulator_x_teleop
+    - [ ] open_manipulator_x_playground
+    - [ ] open_manipulator_x_moveit_config
+    - [ ] open_manipulator_x_gui
+- [ ] Remove dependence custom gz_ros2_control when this [PR](https://github.com/ros-controls/gz_ros2_control/pull/515#issuecomment-2749199964) will add the next version (current there is 2.0.6)
 
 # ROBOTIS e-Manual for OpenMANIPULATOR-X
 - [http://emanual.robotis.com/docs/en/platform/openmanipulator/](http://emanual.robotis.com/docs/en/platform/openmanipulator/)
