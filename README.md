@@ -36,6 +36,16 @@ set(SKIP_BUILD OFF) # Build the package
 ros2 topic pub /effort_controller/commands std_msgs/msg/Float64MultiArray '{data: [1.0, -0.5, 0.3, 0.0]}'
 ```
 
+## Joint limits
+
+| Joint   | Min   | Max   |
+|---------|-------|-------|
+| Joint 1 | -3.14 |  3.14 |
+| Joint 2 | -1.5  |  1.5  |
+| Joint 3 | -1.5  |  1.4  |
+| Joint 4 | -1.7  |  1.97 |
+
+
 ### TODO:
 - [ ] Resolve problem  `[Err] [Physics.cc:1785] Attempting to create a mimic constraint for joint [gripper_right_joint] but the chosen physics engine does not support mimic constraints, so no constraint will be created.`
     -   see [this example](https://github.com/gazebosim/gz-sim/blob/gz-sim8/examples/worlds/mimic_fast_slow_pendulums_world.sdf)
