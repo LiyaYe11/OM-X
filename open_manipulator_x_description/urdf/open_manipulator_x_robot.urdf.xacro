@@ -6,6 +6,7 @@
   <xacro:arg name="use_fake_hardware" default="false" />
   <xacro:arg name="fake_sensor_commands" default="false" />
   <xacro:arg name="port_name" default="/dev/ttyUSB0" />
+  <xacro:arg name="ic_joints" default="[0.0, 0.0, 0.0, 0.0]"/>
 
   <!-- Import Rviz colors -->
   <xacro:include filename="$(find open_manipulator_x_description)/gazebo/materials.xacro" />
@@ -14,12 +15,14 @@
   <xacro:include filename="$(find open_manipulator_x_description)/gazebo/open_manipulator_x.gazebo.xacro" />
 
   <!-- Import URDF -->
-  <xacro:include filename="$(find open_manipulator_x_description)/urdf/open_manipulator_x.urdf.xacro" />
+  <xacro:include filename="$(find open_manipulator_x_description)/urdf/open_manipulator_x.urdf.xacro"/>
 
   <xacro:include filename="$(find open_manipulator_x_description)/ros2_control/open_manipulator_x_system.ros2_control.xacro" />
 
-  <xacro:open_manipulator_x prefix="$(arg prefix)" />
+  <xacro:open_manipulator_x prefix="$(arg prefix)" ic_joints="${list($(arg ic_joints))}"/>
+  
   <xacro:open_manipulator_x_gazebo prefix="$(arg prefix)" />
+
   <xacro:open_manipulator_x_system
     name="OpenManipulatorXSystem" prefix="$(arg prefix)" use_sim="$(arg use_sim)"
     use_fake_hardware="$(arg use_fake_hardware)"
@@ -29,8 +32,7 @@
   <gazebo>
     <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin" filename="gz_ros2_control-system">
       <parameters>$(find open_manipulator_x_bringup)/config/gz_controller_manager.yaml</parameters>
-    </plugin>
-    
+    </plugin>   
   </gazebo>
 
   <!-- World -->

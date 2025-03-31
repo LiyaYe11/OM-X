@@ -120,6 +120,7 @@ def generate_launch_description():
             default_value=pose['Y'],
             description='orientation of open_manipulator_x'),
 
+
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([ThisLaunchFileDir(), '/base.launch.py']),
             launch_arguments={
@@ -135,6 +136,12 @@ def generate_launch_description():
             value=[
                 os.path.join(get_package_share_directory('open_manipulator_x_bringup'), 'worlds'), ':' +
                 str(Path(get_package_share_directory('open_manipulator_x_description')).parent.resolve())]),
+        
+        AppendEnvironmentVariable(
+            name='GZ_SIM_SYSTEM_PLUGIN_PATH',
+            value=[
+                str(Path(get_package_share_directory('gz_ros2_control')).parent.parent.resolve() / 'lib')
+                ]),
 
 
         IncludeLaunchDescription(

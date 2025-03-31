@@ -123,6 +123,14 @@ def generate_launch_description():
         )
     )
 
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            'ic_joints',
+            default_value='[0, 0, 0, 0]',
+            description='Initial Conditions of the arm joints'
+        )
+    )
+
 
     start_rviz = LaunchConfiguration('start_rviz')
     prefix = LaunchConfiguration('prefix')
@@ -133,6 +141,8 @@ def generate_launch_description():
     description_package = LaunchConfiguration('description_package')
     xacro_folder = LaunchConfiguration('xacro_folder')
     xacro_name = LaunchConfiguration('xacro_name')
+    ic_joints = LaunchConfiguration('ic_joints')
+
 
     urdf_file = Command(
         [
@@ -160,6 +170,10 @@ def generate_launch_description():
             ' ',
             'port_name:=',
             port_name,
+            ' ',    
+            'ic_joints:=\'',
+            ic_joints,
+            '\''
         ]
     )
 
