@@ -36,14 +36,37 @@ set(SKIP_BUILD OFF) # Build the package
 ros2 topic pub /effort_controller/commands std_msgs/msg/Float64MultiArray '{data: [1.0, -0.5, 0.3, 0.0]}'
 ```
 
-## Joint limits
+## Link 
+### Gz (Gazebo)
 
-| Joint   | Min   | Max   |
-|---------|-------|-------|
-| Joint 1 | -3.14 |  3.14 |
-| Joint 2 | -1.5  |  1.5  |
-| Joint 3 | -1.5  |  1.4  |
-| Joint 4 | -1.7  |  1.97 |
+**Information gives by manufacturer**
+
+| Link        | Mass (kg)     | Ixx       | Ixy       | Ixz       | Iyy       | Iyz       | Izz       |
+|------------|--------------|-----------|-----------|-----------|-----------|-----------|-----------|
+| Link 1     | 0.079119962  | 1.2505e-05 | 0.0       | -1.7855e-07 | 2.1898e-05 | 0.0       | 1.9267e-05 |
+| Link 2     | 0.098406837  | 3.4543e-05 | -1.6031e-08 | -3.8375e-07 | 3.2689e-05 | 2.8512e-08 | 1.8850e-05 |
+| Link 3     | 0.13850917   | 3.3055e-04 | -9.7941e-08 | -3.8506e-05 | 3.4290e-04 | -1.5718e-06 | 6.0346e-05 |
+| Link 4     | 0.13274562   | 3.0654e-05 | -1.2764e-06 | -2.6874e-07 | 2.4230e-04 | 1.1559e-08 | 2.5155e-04 |
+| Link 5     | 0.14327573   | 8.0871e-05 | 0.0       | -1.0158e-06 | 7.5980e-05 | 0.0       | 9.3127e-05 |
+| Gripper L  | 0.001        | 1.0e-06   | 0.0       | 0.0       | 1.0e-06   | 0.0       | 1.0e-06   |
+| Gripper R  | 0.001        | 1.0e-06   | 0.0       | 0.0       | 1.0e-06   | 0.0       | 1.0e-06   |
+
+Our computation of the inertia:
+🚧 WIP 🚧
+
+
+## Joint limits
+### Gz (Gazebo)
+
+| Joint      | Max velocity (rad/s) | Effort (Nm) | Lower Limit (rad) | Upper Limit (rad) |
+|------------|----------------|-------------|-------------------|-------------------|
+| Joint 1    | 4.8            | 1           | -3.14             | 3.14              |
+| Joint 2    | 4.8            | 1           | -1.5              | 1.5               |
+| Joint 3    | 4.8            | 1           | -1.5              | 1.4               |
+| Joint 4    | 4.8            | 1           | -1.7              | 1.97              |
+| Gripper    | 4.8            | 1           | -0.010            | 0.019             |
+
+
 
 
 ### TODO:
