@@ -197,7 +197,7 @@ def generate_launch_description():
         package='controller_manager',
         executable='ros2_control_node',
         parameters=[
-            {'robot_description': urdf_file},
+            {'robot_description': urdf_file, 'use_sim_time': use_sim},
             controller_manager_config
         ],
         output="both",
@@ -213,6 +213,7 @@ def generate_launch_description():
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',
+        parameters=[{'use_sim_time': use_sim}],
         arguments=['-d', rviz_config_file],
         output='screen',
         condition=IfCondition(start_rviz)
@@ -221,6 +222,7 @@ def generate_launch_description():
     joint_state_broadcaster_spawner = Node(
         package='controller_manager',
         executable='spawner',
+        parameters=[{'use_sim_time': use_sim}],
         arguments=['joint_state_broadcaster', '--controller-manager', '/controller_manager'],
         output='screen',
     )
@@ -228,6 +230,7 @@ def generate_launch_description():
     arm_controller_spawner = Node(
         package='controller_manager',
         executable='spawner',
+        parameters=[{'use_sim_time': use_sim}],
         arguments=['arm_controller'],
         output='screen',
         condition=UnlessCondition(LaunchConfiguration('enable_effort_controller'))
@@ -236,6 +239,7 @@ def generate_launch_description():
     arm_controller_effort_spawner = Node(
         package='controller_manager',
         executable='spawner',
+        parameters=[{'use_sim_time': use_sim}],
         arguments=['arm_controller_effort'],
         output='screen',
         condition=IfCondition(LaunchConfiguration('enable_effort_controller'))
@@ -244,6 +248,7 @@ def generate_launch_description():
     gripper_controller_spawner = Node(
         package='controller_manager',
         executable='spawner',
+        parameters=[{'use_sim_time': use_sim}],
         arguments=['gripper_controller'],
         output='screen',
         condition=IfCondition(LaunchConfiguration('enable_gripper_controller'))

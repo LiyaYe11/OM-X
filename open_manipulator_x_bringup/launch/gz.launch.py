@@ -68,6 +68,14 @@ def generate_launch_description():
             'R': LaunchConfiguration('roll', default='0.00'),
             'P': LaunchConfiguration('pitch', default='0.00'),
             'Y': LaunchConfiguration('yaw', default='0.00')}
+    
+    bridge_config = PathJoinSubstitution(
+        [
+            FindPackageShare('open_manipulator_x_bringup'),
+            'config',
+            'bridge_config.yaml',
+        ]
+    )
 
     return LaunchDescription([
         DeclareLaunchArgument(
@@ -157,12 +165,17 @@ def generate_launch_description():
                 ]
             ),
             launch_arguments={
-                'gz_args': ['-r -v4 ', world], 
-                'on_exit_shutdown': 'true'}.items()
+        Node(package='ros_gz_bridge',
+            executable='parameter_bridge',
+            name='parameter_bridge',
+            parameters=[{'config_file': bridge_config}],
+            output='screen',
         ),
+
 
         Node(package='ros_gz_sim',
             executable='create',
+            parameters=[{'use_sim_time': use_sim}],
             arguments=[ '-topic', 'robot_description',
                     '-name', 'open_manipulator_x_system',
                     '-x', pose['x'],
