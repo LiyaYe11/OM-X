@@ -22,11 +22,14 @@ from pathlib import Path
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.actions import IncludeLaunchDescription
-from launch.actions import AppendEnvironmentVariable,SetEnvironmentVariable
+from launch.actions import AppendEnvironmentVariable
+from launch.actions import SetEnvironmentVariable
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch.substitutions import PathJoinSubstitution
 from launch.substitutions import ThisLaunchFileDir
+from launch.conditions import IfCondition
+from launch.conditions import UnlessCondition
 
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
@@ -50,6 +53,7 @@ def generate_launch_description():
     start_rviz = LaunchConfiguration('start_rviz')
     prefix = LaunchConfiguration('prefix')
     use_sim = LaunchConfiguration('use_sim')
+    start_sim = LaunchConfiguration('start_sim')
 
     world = LaunchConfiguration(
         'world',
@@ -74,6 +78,18 @@ def generate_launch_description():
             FindPackageShare('open_manipulator_x_bringup'),
             'config',
             'bridge_config.yaml',
+        ]
+    )
+
+    gz_sim_launcher = PythonLaunchDescriptionSource(
+        [
+            PathJoinSubstitution(
+                [
+                    FindPackageShare('ros_gz_sim'),
+                    'launch',
+                    'gz_sim.launch.py'
+                ]
+            )
         ]
     )
 
@@ -127,7 +143,11 @@ def generate_launch_description():
             'yaw',
             default_value=pose['Y'],
             description='orientation of open_manipulator_x'),
-
+        
+        DeclareLaunchArgument(
+            'start_sim',
+            default_value='true',
+            description='open gz in running mode'),
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([ThisLaunchFileDir(), '/base.launch.py']),
@@ -151,20 +171,24 @@ def generate_launch_description():
                 str(Path(get_package_share_directory('gz_ros2_control')).parent.parent.resolve() / 'lib')
                 ]),
 
+        IncludeLaunchDescription(
+            gz_sim_launcher,
+            launch_arguments={
+                'gz_args': ['-r', ' -v4 ', world], 
+                'on_exit_shutdown': 'true'}.items(),
+            condition=IfCondition(start_sim)
+        ),
 
         IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(
-                [
-                    PathJoinSubstitution(
-                        [
-                            FindPackageShare('ros_gz_sim'),
-                            'launch',
-                            'gz_sim.launch.py'
-                        ]
-                    )
-                ]
-            ),
+            gz_sim_launcher,
             launch_arguments={
+                'gz_args': [' -v4 ', world], 
+                'on_exit_shutdown': 'true'}.items(),
+            condition=UnlessCondition(start_sim)
+        ),
+
+
+
         Node(package='ros_gz_bridge',
             executable='parameter_bridge',
             name='parameter_bridge',
