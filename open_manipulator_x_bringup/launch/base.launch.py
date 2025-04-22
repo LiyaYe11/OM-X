@@ -126,7 +126,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             'ic_joints',
-            default_value='[0, 0, 0, 0]',
+            default_value='[0, 1.57, -1.57, 0]',
             description='Initial Conditions of the arm joints'
         )
     )
