@@ -8,6 +8,7 @@ Panels:
         - /Status1
         - /RobotModel1
         - /TF1
+        - /TF1/Status1
       Splitter Ratio: 0.5
     Tree Height: 549
   - Class: rviz_common/Selection
@@ -60,68 +61,20 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /robot_description
-      Enabled: true
+      Enabled: false
       Links:
         All Links Enabled: true
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        dummy_mimic_fix:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        end_effector_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        gripper_left_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        gripper_right_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        link1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        link2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        link3:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        link4:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        link5:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        world:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
       Mass Properties:
         Inertia: false
         Mass: false
       Name: RobotModel
       TF Prefix: ""
       Update Interval: 0
-      Value: true
+      Value: false
       Visual Enabled: true
     - Class: rviz_default_plugins/TF
       Enabled: true
@@ -136,6 +89,8 @@ Visualization Manager:
           Value: true
         gripper_right_link:
           Value: true
+        link0:
+          Value: true
         link1:
           Value: true
         link2:
@@ -144,30 +99,27 @@ Visualization Manager:
           Value: true
         link4:
           Value: true
-        link5:
-          Value: true
         world:
           Value: true
-      Marker Scale: 0.3499999940395355
+      Marker Scale: 0.10000000149011612
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: true
       Tree:
         world:
-          link1:
-            link2:
-              link3:
-                link4:
-                  link5:
-                    dummy_mimic_fix:
-                      {}
+          link0:
+            link1:
+              link2:
+                link3:
+                  link4:
                     end_effector_link:
                       {}
                     gripper_left_link:
                       {}
                     gripper_right_link:
-                      {}
+                      dummy_mimic_fix:
+                        {}
       Update Interval: 0
       Value: true
   Enabled: true
@@ -216,25 +168,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 1.3669214248657227
+      Distance: 0.5505831837654114
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.09866781532764435
-        Y: -0.062461238354444504
-        Z: -0.023534774780273438
+        X: 0.0835500955581665
+        Y: -0.05213487148284912
+        Z: 0.026112845167517662
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.84539794921875
+      Pitch: 0.1703978329896927
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.155397653579712
+      Yaw: 4.598574161529541
     Saved: ~
 Window Geometry:
   Displays:
@@ -252,5 +204,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1200
-  X: 130
-  Y: 71
+  X: 1159
+  Y: 262

@@ -32,11 +32,11 @@ https://github.com/ROBOTIS-GIT/turtlebot3/blob/kinetic-devel/turtlebot3_descript
     </gazebo>
   </xacro:macro>
 
+  <xacro:Link reference="${prefix}link0"/>
   <xacro:Link reference="${prefix}link1"/>
   <xacro:Link reference="${prefix}link2"/>
   <xacro:Link reference="${prefix}link3"/>
   <xacro:Link reference="${prefix}link4"/>
-  <xacro:Link reference="${prefix}link5"/>
 
   <xacro:Link reference="${prefix}gripper_left_link"/>
   <xacro:Link reference="${prefix}gripper_right_link"/>

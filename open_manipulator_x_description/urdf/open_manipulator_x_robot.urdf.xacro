@@ -42,7 +42,7 @@
   <joint name="$(arg prefix)world_fixed" type="fixed">
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <parent link="world"/>
-    <child link="$(arg prefix)link1"/>
+    <child link="$(arg prefix)link0"/>
   </joint>
 
 </robot>
