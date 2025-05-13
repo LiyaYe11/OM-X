@@ -163,14 +163,14 @@
       </visual>
 
       <collision>
-        <origin xyz="0.0702 0.0035 0" rpy="0 0 0"/>
+        <origin xyz="0.0415 -0.00574 0" rpy="1.57 0 0"/>
         <geometry>
           <mesh filename="${meshes_file_direction}/pieces_CoM/link4_CoM.stl" scale="0.001 0.001 0.001"/>
         </geometry>
       </collision>
 
       <inertial>
-        <origin xyz="0.0702 0.0035 0" />
+        <origin xyz="0.0415 -0.00574 0" rpy="1.57 0 0" />
         <mass value="23.6e-02" />
         <inertia ixx="237.6911e-06" ixy="20.1638e-06" ixz="-0.0052e-06"
                  iyy="363.9779e-06" iyz="0.0704e-06"
@@ -247,7 +247,7 @@
       </collision>
      
       <inertial>
-        <origin xyz="0 0.0452 0.0274" rpy="0 -1.57 0"/>
+        <origin xyz="0 -0.0452 0.0274" rpy="0 -1.57 0"/>
         <mass value="1.0e-06" />
         <inertia ixx="1.0e-12" ixy="0.0" ixz="0.0"
                  iyy="1.0e-12" iyz="0.0"
