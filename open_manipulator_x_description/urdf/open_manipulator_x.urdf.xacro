@@ -169,8 +169,10 @@
         </geometry>
       </collision>
 
+
+      <!-- TODO Compute again the inertia matrix as 3 difference pieces and not like a unique piece-->
       <inertial>
-        <origin xyz="0.0415 -0.00574 0" rpy="1.57 0 0" />
+        <origin xyz="0.0702 0.0035 0" />
         <mass value="23.6e-02" />
         <inertia ixx="237.6911e-06" ixy="20.1638e-06" ixz="-0.0052e-06"
                  iyy="363.9779e-06" iyz="0.0704e-06"
